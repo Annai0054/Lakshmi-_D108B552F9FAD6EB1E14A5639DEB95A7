@@ -1,26 +1,31 @@
-# 1.1 lmplement  recursive function to calculate the factorial of a given number
-"""
-1! = 1 × 1
-2! = 2 × 1!
-3! = 3 × 2!
-.
-.
-10! = 10 × 9!
+class Bankaccount:
+ def  __init__(self,account_number,account_holder_name,initial_balance=0.0):
+    self.__account_number = account_number
+    self.__account_holder_name = account_holder_name 
+    self.__account_balance = initial_balance
 
-formula - n × (n-1):
-"""
+ def deposit(self, amount):
+   if amount>0:
+    self.__account_balance += amount
+    print("Deposit â‚¹{}. New balance â‚¹{}".format(amount,self.__account_balance))
+   else:
+    print("Invaild deposit amount.")
 
-from typing import MutableMapping
-
-
-def fact_rec(n):
-  if n == 0 or n == 1:
-    return 1
+ def withdraw(self, amount):
+  if amount>0 and amount<=self.__account_balance:
+    self.__account_balance -= amount
+    print("Withdraw â‚¹{}. New balance â‚¹{}".format(amount,self.__account_balance))
   else:
-    return n * fact_rec(n - 1)
+    print("Invaild withdrawl amount or insufficient account balance.")
+
+ def display_balance(self):
+  print("Account balance for {} (account #{}):â‚¹{}".format(self.__account_holder_name,self.__account_number,self.__account_balance))
 
 
-number = int(input("Enter a number :"))
-res = fact_rec(number)
+account = Bankaccount(account_number="123455678",account_holder_name="Hajira",initial_balance=5000.0)
 
-print("The factorial of {} is {}.".format(number, res))
+account.display_balance()
+account.deposit(1000)
+account.withdraw(200)
+account.withdraw(10000)
+account.display_balance()
